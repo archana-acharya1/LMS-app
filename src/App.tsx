@@ -1,4 +1,4 @@
-import Greetings from "./components/Greetings";
+import Navbar from "./components/Navbar";
 // named export
 // export const App = () => {
 //   return(
@@ -13,10 +13,9 @@ import Greetings from "./components/Greetings";
 // default export
 export default function App() {
   return(
-    <>
-      <Greetings name="John" greetings="Good Evening" />
-      <Greetings name="Ritchie" />
-    </>
+    <div className="">
+     <Navbar />
+    </div>
   )
 }
 
