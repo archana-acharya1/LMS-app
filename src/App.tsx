@@ -1,20 +1,12 @@
 import Navbar from "./components/Navbar";
-// named export
-// export const App = () => {
-//   return(
-//     <div>
-//       <h1>Hello World</h1>
-//     </div>
-//   )
-// }
-
-// export {App} // named export
+import Content from "./components/Content";
 
 // default export
 export default function App() {
   return(
-    <div className="">
+    <div className="w-screen h-screen">
      <Navbar />
+     <Content />
     </div>
   )
 }
