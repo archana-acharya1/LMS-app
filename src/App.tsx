@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 // import Content from "./components/Content";
 // import Card from "./components/Card";
 import Form from "./pages/Login";
+import Register from "./pages/Register";
 
 // default export
 export default function App() {
@@ -10,7 +11,7 @@ export default function App() {
      <Navbar />
      <div className="p-4 flex justify-center">
       {/* <Card /> */}
-      <Form />
+      <Register />
      </div>
      {/* <Content /> */}
     </div>
