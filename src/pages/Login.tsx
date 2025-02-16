@@ -1,6 +1,7 @@
 import { useState } from "react";
+import CustomInput from "../components/CustomInput";
 
-export default function Form() {
+export default function Login() {
   // useState is a react hook to store state values
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -12,28 +13,17 @@ export default function Form() {
   };
 
   return (
-    <form className="bg-white flex flex-col p-4">
-      <div className="flex flex-col p-2">
-        <label>Username</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setUserName(event.target.value);
-          }}
-          className="border"
-        />
-      </div>
-      <div className="flex flex-col p-2">
-        <label>Password</label>
-        <input
-          type="password"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          className="border"
-        />
-      </div>
-
+    <form className="bg-white flex flex-col p-4 w-90">
+      <h1 className="text-lg">Login</h1>
+      <CustomInput
+        label="Username"
+        setValue={(value: string) => setUserName(value)}
+      />
+      <CustomInput
+        label="Password"
+        type="password"
+        setValue={(value: string) => setPassword(value)}
+      />
       <button onClick={handleSubmit}>Submit</button>
       {/* conditionally rendering UI */}
       <p>{isSubmitted ? JSON.stringify({ userName, password }) : ""}</p>
