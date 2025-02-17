@@ -18,72 +18,41 @@ const registerSchema = object({
 
 export default function Register() {
   // useState is a react hook to store state values
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ formData });
+
+    // input values extraction from the form
+    const formData = new FormData(e.target as HTMLFormElement);
+    const formValues = Object.fromEntries(formData);
+
+    // Validation using Yup
     try {
-      const validValues = await registerSchema.validate(formData, {
-        abortEarly: false,
-      });
-      console.log(validValues);
-      setError(null);
-      setIsSubmitted(true);
-      // API call
+      await registerSchema.validate(formValues, { abortEarly: false });
+
+      // TODO: API call to register user
     } catch (error: any) {
-      console.log(JSON.stringify(error));
-      setError(error.errors[0]);
+      setError(error.errors.join("\n"));
+      return;
     }
+    console.log(formValues);
   };
 
   return (
-    <div className="flex flex-col w-90">
-      <form className="bg-white flex flex-col p-4 w-full gap-2">
-        <h1 className="text-lg font-bold text-center">Register</h1>
-        <CustomInput
-          label="Name"
-          setValue={(value: string) =>
-            setFormData({ ...formData, name: value })
-          }
-          // error={errorObject.name}
-        />
-        <CustomInput
-          label="Email"
-          type="email"
-          setValue={(value: string) =>
-            setFormData({ ...formData, email: value })
-          }
-          // error={errorObject.email}
-        />
-        <CustomInput
-          label="Phone"
-          type="tel"
-          setValue={(value: string) =>
-            setFormData({ ...formData, phone: value })
-          }
-        />
-        <CustomInput
-          label="Password"
-          type="password"
-          setValue={(value: string) =>
-            setFormData({ ...formData, password: value })
-          }
-        />
-        {error}
+    <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">
+      <h1 className="text-lg font-bold text-center">Register</h1>
+      <form
+        className="flex flex-col p-4 w-full gap-2"
+        onSubmit={handleSubmit}
+      >
+        <CustomInput label="Name" />
+        <CustomInput label="Email" type="email" />
+        <CustomInput label="Phone" type="tel" />
+        <CustomInput label="Password" type="password" />
+        <p className="text-red-400">{error}</p>
 
-        <button
-          type="submit"
-          className="bg-black text-white mt-4 rounded py-1"
-          onClick={handleSubmit}
-        >
+        <button type="submit" className="bg-black text-white mt-4 rounded py-1">
           Submit
         </button>
 
@@ -94,8 +63,6 @@ export default function Register() {
           </span>
         </p>
       </form>
-      {/* conditionally rendering UI */}
-      <p>{isSubmitted ? JSON.stringify(formData) : ""}</p>
     </div>
   );
 }
