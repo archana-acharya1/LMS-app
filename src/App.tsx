@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router";
-import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Avatar from "./components/Avatar";
 import Dashboard from "./pages/Dashboard";
 
 // default export
@@ -19,7 +17,7 @@ function AppRoutes() {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="dashboard" element={<Dashboard />}>
+      <Route path="/" element={<Dashboard />}>
         <Route path="users" element={<>Users</>} />
         <Route path="books" element={<>Books</>} />
         <Route path="profile" element={<>Profile</>} />

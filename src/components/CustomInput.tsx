@@ -14,7 +14,7 @@ export default function CustomInput({
     <div className="grid">
       <label>{label}</label>
       <input
-        className={`border border-gray-300 rounded w-40}`}
+        className={`border border-gray-300 rounded w-full px-2 py-1`}
         required={required}
         type={type}
         name={label.toLowerCase()}
