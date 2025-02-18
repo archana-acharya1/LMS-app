@@ -1,5 +1,5 @@
 interface AvatarProps {
-  imageUrl: string;
+  imageUrl: string | null;
   name: string;
 }
 
@@ -9,7 +9,9 @@ interface AvatarProps {
 export default function Avatar({ imageUrl, name }: AvatarProps) {
   return (
     <div className="flex flex-row w-fit items-center justify-center gap-2">
-      <img className="rounded-full" src={imageUrl} height={24} width={24} />
+      {imageUrl && (
+        <img className="rounded-full" src={imageUrl} height={24} width={24} />
+      )}
       <p className="text-lg">{name}</p>
     </div>
   )

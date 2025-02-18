@@ -1,4 +1,3 @@
-
 import { NavLink, Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 

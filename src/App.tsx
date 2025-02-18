@@ -1,8 +1,6 @@
-import Navbar from "./components/Navbar";
-import Content from "./components/Content";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import { Routes, Route } from "react-router";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 // default export
 export default function App() {
