@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { object, string } from "yup";
 import CustomInput from "../components/CustomInput";
 import { NavLink } from "react-router";
@@ -16,9 +16,20 @@ const registerSchema = object({
   password: string().required("Password is a required field!"),
 });
 
+const token = ""
+
+// Event triggers
+// - user interactions
+//  - onClick
+//  - onChange
+//  - onSubmit
+// - automatic
+//  - useEffect
+
 export default function Register() {
   // useState is a react hook to store state values
   const [error, setError] = useState<string | null>(null);
+  const [triggerUseEffect, setTriggerUseEffect] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +50,43 @@ export default function Register() {
     console.log(formValues);
   };
 
+  // always wrap API calls in try-catch block
+  const fetchData = async () => {
+    try {
+    const response = await fetch('http://localhost:3000/users', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    const data = await response.json();
+    console.log(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+  const fetchDataa = async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+    const data = await response.json();
+    console.log("dependency", data);
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log("abc")
+  }, []) // runs on page load // used for API calls
+
+  useEffect(() => {
+    fetchDataa();
+    console.log("dependency");
+  }, [triggerUseEffect]) // runs on page load
+
+  // Request method
+  // - GET - default method
+  // - POST - create (has request body)
+  // - PATCH - update (has request body)
+  // - DELETE
+
   return (
     <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">
       <h1 className="text-lg font-bold text-center">Register</h1>
@@ -54,6 +102,10 @@ export default function Register() {
 
         <button type="submit" className="bg-black text-white mt-4 rounded py-1">
           Submit
+        </button>
+
+        <button type="button" onClick={() => setTriggerUseEffect(!triggerUseEffect)} className="bg-black text-white mt-4 rounded py-1">
+          Trigger API call
         </button>
 
         <p className="w-full mt-4 text-center">
