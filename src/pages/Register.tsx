@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { object, string } from "yup";
 import CustomInput from "../components/CustomInput";
-import { NavLink } from "react-router";
+import { data, NavLink } from "react-router";
 
 const registerSchema = object({
   name: string()
@@ -15,6 +15,8 @@ const registerSchema = object({
     .matches(/^[0-9]*$/, "Phone should not contain string!"),
   password: string().required("Password is a required field!"),
 });
+
+const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpYXQiOjE3Mzk4NjY0MjIsImV4cCI6MTc0MTE2MjQyMn0.LbMnbTN3YzjXr-xCthXmc6MytDRa7NchqATL-XcDNsI"
 
 export default function Register() {
   // useState is a react hook to store state values
@@ -38,6 +40,17 @@ export default function Register() {
     }
     console.log(formValues);
   };
+
+  const fetchData = async () => {
+    const response= await fetch('http://localhost:3000/api/users',{
+    headers: {
+      'Content-Type': 'application.json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    const data =await response.json();
+    console.log(data);
+  }
 
   return (
     <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">
