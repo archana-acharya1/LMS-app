@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Users from "./pages/Users";
 
 // default export
 export default function App() {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
+      <Route path="users" element={<Users />} />
     </Routes>
   );
 };

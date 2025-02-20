@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { object, string } from "yup";
 import CustomInput from "../components/CustomInput";
 import { data, NavLink } from "react-router";
@@ -16,7 +16,8 @@ const registerSchema = object({
   password: string().required("Password is a required field!"),
 });
 
-const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpYXQiOjE3Mzk4NjY0MjIsImV4cCI6MTc0MTE2MjQyMn0.LbMnbTN3YzjXr-xCthXmc6MytDRa7NchqATL-XcDNsI"
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpYXQiOjE3Mzk4NjY0MjIsImV4cCI6MTc0MTE2MjQyMn0.LbMnbTN3YzjXr-xCthXmc6MytDRa7NchqATL-XcDNsI";
 
 export default function Register() {
   // useState is a react hook to store state values
@@ -41,24 +42,10 @@ export default function Register() {
     console.log(formValues);
   };
 
-  const fetchData = async () => {
-    const response= await fetch('http://localhost:3000/api/users',{
-    headers: {
-      'Content-Type': 'application.json',
-      'Authorization': `Bearer ${token}`
-    }
-  })
-    const data =await response.json();
-    console.log(data);
-  }
-
   return (
     <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">
       <h1 className="text-lg font-bold text-center">Register</h1>
-      <form
-        className="flex flex-col p-4 w-full gap-2"
-        onSubmit={handleSubmit}
-      >
+      <form className="flex flex-col p-4 w-full gap-2" onSubmit={handleSubmit}>
         <CustomInput label="Name" />
         <CustomInput label="Email" type="email" />
         <CustomInput label="Phone" type="tel" />
