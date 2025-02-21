@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import CustomTable from "./components/CustomTable";
 
 // default export
 export default function App() {
@@ -17,6 +18,7 @@ function AppRoutes() {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
+      <Route path="/table" element={<CustomTable />} />
       <Route path="/" element={<Dashboard />}>
         <Route path="users" element={<>Users</>} />
         <Route path="books" element={<>Books</>} />
