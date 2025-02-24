@@ -25,6 +25,9 @@ export default function Login() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
       localStorage.setItem("token", data.token);
       console.log(data);
       navigate("/");

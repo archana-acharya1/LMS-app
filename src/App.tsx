@@ -1,8 +1,7 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import CustomTable from "./components/CustomTable";
+import AppLayout from "./AppLayout";
 
 // default export
 export default function App() {
@@ -13,16 +12,19 @@ export default function App() {
   );
 }
 
+const ProtectedRoute = () => {
+  const token = localStorage.getItem("token");
+  return token ? <AppLayout /> : <Navigate to="login" />;
+}
+
 function AppRoutes() {
   return (
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="/table" element={<CustomTable />} />
-      <Route path="/" element={<Dashboard />}>
-        <Route path="users" element={<>Users</>} />
-        <Route path="books" element={<>Books</>} />
-        <Route path="profile" element={<>Profile</>} />
+      <Route path="/" element={<ProtectedRoute />}>
+        <Route path="users" element={<h1>Users</h1>} />
+        <Route path="books" element={<h1>Books</h1>} />
       </Route>
     </Routes>
   );
