@@ -1,19 +1,38 @@
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 export default function Login() {
   // useState is a react hook to store state values
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();  // initialize navigate hook
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData);
     console.log(formValues);
+    loginUser(formValues);
 
     // TODO: API call to login user
   };
+
+  const loginUser = async (formData: any) => {
+    console.log(formData);
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.log("error", error);
+      setError("Invalid username or password");
+    }
+  }
 
   return (
     <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">
