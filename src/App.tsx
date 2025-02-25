@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AppLayout from "./AppLayout";
+import Books from "./pages/Books";
 
 // default export
 export default function App() {
@@ -24,7 +25,7 @@ function AppRoutes() {
       <Route path="register" element={<Register />} />
       <Route path="/" element={<ProtectedRoute />}>
         <Route path="users" element={<h1>Users</h1>} />
-        <Route path="books" element={<h1>Books</h1>} />
+        <Route path="books" element={<Books />} />
       </Route>
     </Routes>
   );

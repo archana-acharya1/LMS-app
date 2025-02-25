@@ -4,15 +4,21 @@ import "./CustomTable.css";
 export default function CustomTable() {
   const HEADERS = ["ID", "Name", "Email", "Status", "Phone"];
   return (
-    <table className="w-fit h-fit">
+    <table
+      border={1}
+      cellPadding={8}
+      className="w-full h-fit overflow-auto table-auto"
+    >
       <thead>
-        {HEADERS.map((header) => (
-          <th>{header}</th>
-        ))}
+        <tr>
+          {HEADERS.map((header) => (
+            <th key={header}>{header}</th>
+          ))}
+        </tr>
       </thead>
       <tbody>
         {UserData.map((user) => (
-          <tr>
+          <tr key={user.id}>
             <td>{user.id}</td>
             <td>{user.name}</td>
             <td>{user.email}</td>
@@ -22,5 +28,5 @@ export default function CustomTable() {
         ))}
       </tbody>
     </table>
-  )
+  );
 }

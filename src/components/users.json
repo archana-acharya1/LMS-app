@@ -19,5 +19,12 @@
     "email": "shannon@gmail.com",
     "status": "active",
     "phone": "123-456-7890"
+  },
+  {
+    "id": 4,
+    "name": "Shan ice Brown",
+    "email": "shan@gmail.com",
+    "status": "active",
+    "phone": "123-456-7890"
   }
 ]

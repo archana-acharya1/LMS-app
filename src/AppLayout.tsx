@@ -1,17 +1,14 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import Navbar from "./components/Navbar";
 
 export default function AppLayout() {
+  const navigate = useNavigate();
   return (
     <div className="dashboard w-full h-screen">
       <Navbar />
       <div className="flex w-full h-[calc(100%-64px)]">
-        <aside className="bg-white w-64 py-4 shadow-sm">
-          {/*
-          we use "/users" for absolute path
-          and "users" for relative path
-        */}
-          <ul>
+        <aside className="bg-white w-64 py-8 shadow-sm flex flex-col justify-between">
+          <ul className="text-xl">
             <li>
               <NavLink
                 to="users"
@@ -35,8 +32,18 @@ export default function AppLayout() {
               </NavLink>
             </li>
           </ul>
+          <button
+            type="button"
+            className="text-xl px-4 cursor-pointer"
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/login");
+            }}
+          >
+            Logout
+          </button>
         </aside>
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-12">
           <Outlet />
         </div>
       </div>
