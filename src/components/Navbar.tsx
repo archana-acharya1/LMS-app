@@ -11,3 +11,19 @@ export default function Navbar() {
     </nav>
   );
 }
+
+
+// img src={imageUrl} alt={name} className="w-8 h-8 rounded-full"
+
+
+
+// component
+// hooks - useState, useEffect
+// API integration
+// routing
+// local state management
+// authorization / authentication
+
+// form handling
+// context
+// redux

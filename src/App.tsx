@@ -3,6 +3,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AppLayout from "./AppLayout";
 import Books from "./pages/Books";
+import AddBooks from "./pages/AddBooks";
 
 // default export
 export default function App() {
@@ -24,11 +25,16 @@ function AppRoutes() {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="/" element={<ProtectedRoute />}>
-        <Route path="users" element={<h1>Users</h1>} />
+        <Route path="users" element={<Users />} />
         <Route path="books" element={<Books />} />
+        <Route path="books/add" element={<AddBooks />} />
       </Route>
     </Routes>
   );
+}
+
+function Users() {
+  return <h1>Users</h1>;
 }
 
 // JSX can have only one parent element
