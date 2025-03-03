@@ -49,6 +49,7 @@ export default function Books() {
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-8">Books</h1>
+      {/* TODO: Add button to add book - navigate to books/add on click */}
       <table
         border={1}
         cellPadding={8}

@@ -13,8 +13,6 @@ export default function Login() {
     const formValues = Object.fromEntries(formData);
     console.log(formValues);
     loginUser(formValues);
-
-    // TODO: API call to login user
   };
 
   const loginUser = async (formData: any) => {

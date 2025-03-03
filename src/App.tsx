@@ -28,6 +28,7 @@ function AppRoutes() {
         <Route path="users" element={<Users />} />
         <Route path="books" element={<Books />} />
         <Route path="books/add" element={<AddBooks />} />
+        {/* TODO: add route for book edit - it's a dynamic route */}
       </Route>
     </Routes>
   );
