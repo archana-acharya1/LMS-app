@@ -27,7 +27,7 @@ export default function Books() {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (!response.ok) {
+      if (response.ok) {
         setIsOpen(false);
         setCurrentId(null);
         console.log("Book deleted successfully", response);
