@@ -2,8 +2,8 @@ import { Routes, Route, Navigate } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AppLayout from "./AppLayout";
-import Books from "./pages/Books";
-import AddBooks from "./pages/AddBooks";
+import Books from "./pages/books/Books";
+import AddBooks from "./pages/books/AddBooks";
 
 // default export
 export default function App() {
