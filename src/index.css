@@ -1,1 +1,18 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+table {
+    font-size: large;
+  }
+  
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 16px;
+    height: 48px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  

@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@gmail.com",
+        "status": "inactive",
+        "phone":"1232435345"
+    },
+    {
+        "id": 2,
+        "name": "Bob Williams",
+        "email": "bob@gmail.com",
+        "status": "inactive",
+        "phone":"7685346834"
+    },
+    {
+        "id":3 ,
+        "name": "Shannon Jackson",
+        "email":"shannonjackson@gmail.com" ,
+        "status":"active" ,
+        "phone":"4354357657"
+    }
+
+]

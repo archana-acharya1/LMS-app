@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { object, string } from "yup";
 import CustomInput from "../components/CustomInput";
-import { data, NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+}
 
 const registerSchema = object({
   name: string()
@@ -16,12 +23,10 @@ const registerSchema = object({
   password: string().required("Password is a required field!"),
 });
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpYXQiOjE3Mzk4NjY0MjIsImV4cCI6MTc0MTE2MjQyMn0.LbMnbTN3YzjXr-xCthXmc6MytDRa7NchqATL-XcDNsI";
-
 export default function Register() {
   // useState is a react hook to store state values
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +37,10 @@ export default function Register() {
 
     // Validation using Yup
     try {
-      await registerSchema.validate(formValues, { abortEarly: false });
+      const validFormData = await registerSchema.validate(formValues, {
+        abortEarly: false,
+      });
+      registerUser(validFormData);
 
       // TODO: API call to register user
     } catch (error: any) {
@@ -40,6 +48,25 @@ export default function Register() {
       return;
     }
     console.log(formValues);
+  };
+
+  const registerUser = async (formData: FormData) => {
+    console.log(formData);
+    try {
+      const response = await fetch("http://localhost:3000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
