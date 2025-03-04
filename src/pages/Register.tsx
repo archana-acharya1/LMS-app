@@ -23,10 +23,22 @@ const registerSchema = object({
   password: string().required("Password is a required field!"),
 });
 
+// Event triggers
+// - user interactions
+//  - onClick
+//  - onChange
+//  - onSubmit
+// - automatic
+//  - useEffect
+
 export default function Register() {
   // useState is a react hook to store state values
   const [error, setError] = useState<string | null>(null);
+<<<<<<< HEAD
   const navigate = useNavigate();
+=======
+  const navigate = useNavigate();  // initialize navigate hook
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,15 +53,18 @@ export default function Register() {
         abortEarly: false,
       });
       registerUser(validFormData);
+<<<<<<< HEAD
 
       // TODO: API call to register user
+=======
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
     } catch (error: any) {
       setError(error.errors.join("\n"));
       return;
     }
-    console.log(formValues);
   };
 
+<<<<<<< HEAD
   const registerUser = async (formData: FormData) => {
     console.log(formData);
     try {
@@ -58,17 +73,36 @@ export default function Register() {
         headers: {
           "Content-Type": "application/json",
         },
+=======
+  // always wrap API calls in try-catch block
+  const registerUser = async (formData: FormData) => {
+    try {
+      const response = await fetch("http://localhost:3000/auth/register", {
+        method: "POST",
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
         body: JSON.stringify(formData),
       });
       const data = await response.json();
       localStorage.setItem("token", data.token);
+<<<<<<< HEAD
       console.log(data);
+=======
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
       navigate("/");
     } catch (error) {
       console.log("error", error);
     }
   };
 
+<<<<<<< HEAD
+=======
+  // Request method
+  // - GET - default method
+  // - POST - create (has request body)
+  // - PATCH - update (has request body)
+  // - DELETE
+
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
   return (
     <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">
       <h1 className="text-lg font-bold text-center">Register</h1>

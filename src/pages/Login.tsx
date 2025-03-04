@@ -1,24 +1,36 @@
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import { NavLink, useNavigate } from "react-router";
+<<<<<<< HEAD
 
 interface FormData {
   username: string;
   password: string;
 }
+=======
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
 
 export default function Login() {
   // useState is a react hook to store state values
   const [error, setError] = useState<string | null>(null);
+<<<<<<< HEAD
   const navigate = useNavigate();
+=======
+  const navigate = useNavigate();  // initialize navigate hook
+
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData);
     console.log(formValues);
+<<<<<<< HEAD
     loginUser(formValues as unknown as FormData);
 
     // TODO: API call to login user
+=======
+    loginUser(formValues);
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
   };
 
   const loginUser = async (formData: any) => {
@@ -26,6 +38,7 @@ export default function Login() {
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
+<<<<<<< HEAD
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,6 +46,11 @@ export default function Login() {
       });
 
       const data = await response.json(); //write in register page also
+=======
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
       if (!response.ok) {
         throw new Error(data.message);
       }
@@ -43,7 +61,11 @@ export default function Login() {
       console.log("error", error);
       setError("Invalid username or password");
     }
+<<<<<<< HEAD
   };
+=======
+  }
+>>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
 
   return (
     <div className="flex flex-col w-90 bg-white p-4 rounded shadow-md">

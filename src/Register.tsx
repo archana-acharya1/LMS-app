@@ -1,1 +1,0 @@
-// TODO: Create register page for LMS
