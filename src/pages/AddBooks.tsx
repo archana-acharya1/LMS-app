@@ -1,6 +1,7 @@
 import React from "react";
 import CustomInput from "../components/CustomInput";
 import { useNavigate } from "react-router";
+import { PlusIcon } from "lucide-react";
 // import axios from "axios";
 
 export default function AddBooks() {
@@ -76,9 +77,12 @@ export default function AddBooks() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-black w-[150px] text-white py-2 rounded-md cursor-pointer"
+            className="bg-black w-[150px] text-white px-0.5 py-2 rounded-md cursor-pointer"
           >
-            + Add Book
+            <div className="flex flex-row">
+              <PlusIcon />
+              Add Book
+            </div>
           </button>
         </div>
       </form>

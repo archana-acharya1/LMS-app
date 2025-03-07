@@ -1,5 +1,4 @@
 [
-<<<<<<< HEAD
     {
         "id": 1,
         "name": "John Doe",
@@ -22,34 +21,4 @@
         "phone":"4354357657"
     }
 
-=======
-  {
-    "id": 1,
-    "name": "John Doe",
-    "email": "john@gmail.com",
-    "status": "active",
-    "phone": "123-456-7890"
-  },
-  {
-    "id": 2,
-    "name": "Bob Williams",
-    "email": "bob@gmail.com",
-    "status": "inactive",
-    "phone": "123-456-7890"
-  },
-  {
-    "id": 3,
-    "name": "Shannon Jackson",
-    "email": "shannon@gmail.com",
-    "status": "active",
-    "phone": "123-456-7890"
-  },
-  {
-    "id": 4,
-    "name": "Shan ice Brown",
-    "email": "shan@gmail.com",
-    "status": "active",
-    "phone": "123-456-7890"
-  }
->>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
 ]

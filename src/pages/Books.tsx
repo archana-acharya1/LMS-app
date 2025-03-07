@@ -36,7 +36,7 @@ export default function Books() {
   useEffect(() => {
     console.log("page loaded");
     fetchData();
-  }, []); // runs the code on the first load
+  }, []); 
 
   const Header = [
     "ID",

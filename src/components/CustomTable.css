@@ -2,12 +2,8 @@ table {
   font-size: large;
 }
 
-<<<<<<< HEAD
 td,
 th {
-=======
-td, th {
->>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
   border: 1px solid #dddddd;
   text-align: left;
   padding: 16px;
@@ -16,8 +12,4 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f6bc836ecf1ea62ad69479646c4519b718d6c587
