@@ -4,15 +4,14 @@ import { useNavigate, useParams } from "react-router";
 
 export default function EditBook() {
   const [bookData, setBookData] = useState<any>({});
-  const [isEditing, setIsEditing] = useState(false);
-
+  const [isEditing, setIsEditing] = useState(true);
   const token = localStorage.getItem("token");
   const { id } = useParams();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     const bookDataReq = {
       ...bookData,
       ISBN: parseInt(bookData.ISBN, 10),
@@ -30,11 +29,8 @@ export default function EditBook() {
         },
         body: JSON.stringify(bookDataReq),
       });
-
-      if (response.status === 201) {
-        alert("Book updated successfully!");
         navigate("/books");
-      }
+    
     } catch (error) {
       console.error("Error updating book:", error);
       alert("Failed to update book.");
@@ -51,11 +47,11 @@ export default function EditBook() {
         },
       });
       const parsedData = await response.json();
-      
+
       setBookData({
         ...parsedData,
         published_date: parsedData.published_date
-          ? new Date(parsedData.published_date).toISOString().split("T")[0] // Format date for input[type="date"]
+          ? new Date(parsedData.published_date).toISOString().split("T")[0]
           : "",
       });
     } catch (err) {
@@ -78,13 +74,13 @@ export default function EditBook() {
   return (
     <div className="flex flex-col items-start gap-4">
       <h1 className="text-lg font-bold">Edit Book</h1>
-      
+
       <div className="flex justify-end w-full">
         <button
-          onClick={() => setIsEditing((prev) => !prev)}
+          onClick={() => navigate("/books")}
           className="bg-black w-[150px] text-white py-2 rounded-md cursor-pointer"
         >
-          {isEditing ? "Cancel" : "Edit"}
+          Cancel
         </button>
       </div>
 
@@ -169,10 +165,6 @@ export default function EditBook() {
             <button
               type="submit"
               className="bg-green-600 w-[150px] text-white py-2 rounded-md cursor-pointer"
-              onClick={() => {
-                navigate("/books");
-             
-              }}
             >
               Save
             </button>

@@ -1,15 +1,9 @@
-// create a component to display the list of books in a table
-// * API call to fetch Books data
-// * Display the list of books in a table
-
 import { useNavigate } from "react-router";
 import CustomDialog from "../../components/CustomDialog";
 import UserData from "../../components/users.json";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import "../../components/CustomTable.css";
 import { useState } from "react";
-
-// const BOOKS_HEADER=["ID", "Title", "Author", "Publisher", "Published Date", "Category", "ISBN", "Available Copies", "Total Copies"]
 export default function Books() {
   const HEADERS = ["ID", "Name", "Email", "Status", "Phone"];
   const token = localStorage.getItem("token");
@@ -49,7 +43,6 @@ export default function Books() {
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-8">Books</h1>
-      {/* TODO: Add button to add book - navigate to books/add on click */}
       <table
         border={1}
         cellPadding={8}

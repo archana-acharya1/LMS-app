@@ -1,16 +1,14 @@
-import { PencilIcon, Trash2Icon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router";
+import { BooksContext } from "../context/BooksContext";
+import { PencilIcon, Trash2Icon } from "lucide-react";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpYXQiOjE3Mzk4NjY0MjIsImV4cCI6MTc0MTE2MjQyMn0.LbMnbTN3YzjXr-xCthXmc6MytDRa7NchqATL-XcDNsI";
-
-interface Book {
+export interface Book {
   id: number;
   title: string;
   author: string;
   publisher: string;
-  published_date: Date;
+  published_date: string;
   ISBN: number;
   category: string;
   available_copies: number;
@@ -18,116 +16,106 @@ interface Book {
 }
 
 export default function Books() {
-  const [bookData, setBookData] = useState<Book[]>([]);
   const navigate = useNavigate();
-  const fetchData = async () => {
-    //const response = await fetch(API_URL, options - headers, body, method)
-    const response = await fetch("http://localhost:3000/books", {
-      method: "GET", // default method, explicit declaration not required
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json(); // convert to json object
-    setBookData(data);
-  };
+  const { bookData, setBookData } = useContext(BooksContext);
 
-  useEffect(() => {
-    console.log("page loaded");
-    fetchData();
-  }, []); 
+  const handleDelete = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this book?")) return;
 
-  const Header = [
-    "ID",
-    "Title",
-    "Author",
-    "Publisher",
-    "Published_date",
-    "ISBN",
-    "Category",
-    "Available_copies",
-    "Total-copies",
-  ];
+    const token = localStorage.getItem("token");
 
-  const token = localStorage.getItem("token");
-
-  const handleDelete = (id: number) => {
-    console.log("Delete button clicked", id);
-    //TODO: API call to delete the books - method:DELETE
     try {
-      const response = fetch(`http://localhost:3000/books/${id}`, {
+      await fetch(`http://localhost:3000/books/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Book deleted successfully", response);
+
+      const filteredBooks = bookData.filter((book) => book.id !== id);
+      setBookData(filteredBooks);
     } catch (error) {
-      console.error("Error while deleting the book", error);
+      console.error("Error while deleting the book:", error);
     }
   };
 
   const handleEdit = (id: number) => {
-    console.log("Edit button clicked", id);
     navigate(`/books/edit/${id}`);
-    //TODO: API call to EDIT the books - method:PATCH
   };
+
   return (
-    <div className="w-full h-full overflow-hidden">
-      <h1 className="text-3xl ">Books</h1>
+    <div className="w-full h-full p-6">
+      <h1 className="text-3xl font-semibold mb-4">Books</h1>
 
       <button
         onClick={() => navigate("/books/add")}
-        className="bg-black text-white mt-4 rounded py-1 cursor-pointer"
+        className="bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
       >
-        Add Book
+        + Add Book
       </button>
-      <div className="w-full overflow-auto">
-      <table className="table-auto h-fit w-full bg-white">
-        <thead>
-          <tr>
-            {Header.map((header) => (
-              <th>{header}</th>
-            ))}
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookData.length > 0 &&
-            bookData.map((book) => (
-              <tr key={book.id}>
-                <td>{book.id}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.publisher}</td>
-                <td>{new Date(book.published_date).toLocaleDateString()}</td>
-                <td>{book.ISBN}</td>
-                <td>{book.category}</td>
-                <td>{book.available_copies}</td>
-                <td>{book.total_copies}</td>
-                <td>
-                  <div className="flex gap-4 text-sm items-center justify-center">
-                    <button>
-                      <Trash2Icon
-                        className="cursor-pointer"
-                        onClick={() => handleDelete(book.id)}
-                        color="red"
-                      />
-                    </button>
-                    <button>
-                      <PencilIcon
+
+      <div className="w-full overflow-auto mt-6">
+        <table className="w-full bg-white border border-black-500 rounded-lg shadow-md">
+          <thead className="bg-green-200 border-b">
+            <tr className="text-left text-gray-600">
+              <th className="p-3">ID</th>
+              <th className="p-3">Title</th>
+              <th className="p-3">Author</th>
+              <th className="p-3">Publisher</th>
+              <th className="p-3">Published Date</th>
+              <th className="p-3">ISBN</th>
+              <th className="p-3">Category</th>
+              <th className="p-3">Available Copies</th>
+              <th className="p-3">Total Copies</th>
+              <th className="p-3 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookData.length > 0 ? (
+              bookData.map((book) => (
+                <tr
+                  key={book.id}
+                  className="border-b hover:bg-gray-50 transition duration-150"
+                >
+                  <td className="p-3">{book.id}</td>
+                  <td className="p-3">{book.title}</td>
+                  <td className="p-3">{book.author}</td>
+                  <td className="p-3">{book.publisher}</td>
+                  <td className="p-3">
+                    {new Date(book.published_date).toLocaleDateString()}
+                  </td>
+                  <td className="p-3">{book.ISBN}</td>
+                  <td className="p-3">{book.category}</td>
+                  <td className="p-3">{book.available_copies}</td>
+                  <td className="p-3">{book.total_copies}</td>
+                  <td className="p-3 text-center">
+                    <div className="flex gap-3 justify-center">
+                      <button
                         onClick={() => handleEdit(book.id)}
-                        color="green"
-                      />
-                    </button>
-                  </div>
+                        className="p-2 bg-green-400 text-white rounded-md hover:bg-green-600 transition duration-150"
+                      >
+                        <PencilIcon size={18} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(book.id)}
+                        className="p-2 bg-red-400 text-white rounded-md hover:bg-red-600 transition duration-150"
+                      >
+                        <Trash2Icon size={18} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={10} className="p-4 text-center text-gray-500">
+                  No books available.
                 </td>
               </tr>
-            ))}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

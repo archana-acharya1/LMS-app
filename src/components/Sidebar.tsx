@@ -23,8 +23,11 @@ export default function Sidebar() {
           }
         >
           <li className="hover:bg-amber-100">
-            <BookIcon/>Books</li>
-
+            <div className="flex gap-3">
+              <BookIcon />
+              Books
+            </div>
+          </li>
         </NavLink>
 
         <NavLink
@@ -36,7 +39,7 @@ export default function Sidebar() {
           `
           }
         >
-          <li className="hover:bg-amber-100 p-6">
+          <li className="hover:bg-amber-100">
             <div className="flex gap-3">
               <User />
               Members
@@ -53,8 +56,11 @@ export default function Sidebar() {
           }
         >
           <li className="hover:bg-amber-100">
-            <DollarSign/>Transactions</li>
-
+          <div className="flex gap-3">
+            <DollarSign />
+            Transactions
+            </div>
+          </li>
         </NavLink>
       </ul>
       <button

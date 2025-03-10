@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import CustomInput from "../components/CustomInput";
 import { useNavigate } from "react-router";
 import { PlusIcon } from "lucide-react";
-// import axios from "axios";
+import { BooksContext } from "../context/BooksContext";
 
 export default function AddBooks() {
   const token = localStorage.getItem("token");
+  const { setBookData } = useContext(BooksContext);
 
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const bookData = JSON.stringify(Object.fromEntries(formData.entries())); // Convert FormData to object
+    const bookData = JSON.stringify(Object.fromEntries(formData.entries()));
     const parsedData = JSON.parse(bookData);
     const bookDataReq = {
       ...parsedData,
@@ -31,7 +32,11 @@ export default function AddBooks() {
         body: JSON.stringify(bookDataReq),
       });
 
+      const responseJson = await response.json();
+
       if (response.status === 201) {
+        // @ts-ignore
+        setBookData((prev) => [...prev, responseJson]);
         alert("Book added successfully!");
         navigate("/books");
       }

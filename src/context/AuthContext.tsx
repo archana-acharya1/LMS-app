@@ -18,7 +18,8 @@ const AuthContext = createContext<AuthContextType>({
 
 //children is a special prop that holds all the children (consumer) components
 const AuthProvider: any = ({ children }: any) => {
-  const [token, setToken] = useState<string | null>("tokennn");
+  const storedToken = localStorage.getItem("token");
+  const [token, setToken] = useState<string | null>(storedToken ?? null);
 
   const handleLogout = () => {
     setToken(null);
