@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { BooksContext } from "../../context/BooksContext";
 import { MembersContext } from "../../context/MemberContext";
+import { api } from "../../utils/api";
 
 export default function AddTransaction() {
   const [transactionType, setTransactionType] = useState("Borrow");
@@ -53,23 +54,18 @@ export default function AddTransaction() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/transactions", {
+      const response = await api({
+        url: "/transactions",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(transactionDataReq),
+        data: transactionDataReq,
       });
-
-      const result = await response.json();
 
       if (response.status === 201) {
         alert("Transaction added successfully!");
         navigate("/transactions");
       } else {
-        console.error("Failed to add transaction:", result);
-        alert(result.message || "Failed to add transaction.");
+        console.error("Failed to add transaction:", response.data);
+        alert(response.data.message || "Failed to add transaction.");
       }
     } catch (error) {
       console.error("Error adding transaction:", error);

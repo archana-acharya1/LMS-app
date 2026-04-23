@@ -1,9 +1,8 @@
 import { PencilIcon, Trash2Icon } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../../context/AuthContext"; // Update with actual path
 
-interface Transaction {
+export interface Transaction {
   id: number;
   deadline: string;
   member_id: string;
@@ -31,13 +30,13 @@ export default function Transaction() {
         },
       });
 
-      console.log("Response Status:", response.status); // Debugging
+      console.log("Response Status:", response.status); 
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
 
       const data = await response.json();
-      console.log("Fetched Data:", data); // Debugging
+      console.log("Fetched Data:", data); 
 
       if (Array.isArray(data)) {
         setTransactionData(
@@ -53,7 +52,7 @@ export default function Transaction() {
 
   useEffect(() => {
     fetchData();
-  }, [token]); // Re-fetch when token updates
+  }, [token]); 
 
   const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this transaction?")) return;

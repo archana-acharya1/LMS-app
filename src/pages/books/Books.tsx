@@ -4,6 +4,7 @@ import UserData from "../../components/users.json";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import "../../components/CustomTable.css";
 import { useState } from "react";
+
 export default function Books() {
   const HEADERS = ["ID", "Name", "Email", "Status", "Phone"];
   const token = localStorage.getItem("token");

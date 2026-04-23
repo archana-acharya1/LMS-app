@@ -11,7 +11,7 @@ export default function EditTransaction() {
   // Fetch member details
   const findTransaction = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/members/${id}`, {
+      const response = await fetch(`http://localhost:3000/transactions/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

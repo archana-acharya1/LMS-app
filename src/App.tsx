@@ -1,18 +1,17 @@
 import { Routes, Route, Navigate } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Books from "./pages/Books";
 import CustomTable from "./components/CustomTable";
 import AppLayout from "./AppLayout";
 import Members from "./pages/Member";
-import AddBooks from "./pages/AddBooks";
-import EditBook from "./pages/EditBook";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import AddBooks from "./pages/books/AddBooks";
 import EditMember from "./pages/EditMembers";
 import AddMembers from "./pages/AddMember";
 import Transaction from "./pages/transactions/Transaction";
 import AddTransaction from "./pages/transactions/AddTransactions";
+import EditTransaction from "./pages/transactions/EditTransaction";
+import Books from "./pages/books/Books";
+import EditBook from "./pages/EditBook";
 
 export default function App() {
   return (
@@ -37,14 +36,16 @@ const AppRoutes = () => {
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Users />} />
         <Route path="/books" element={<Books />} />
+        <Route path="/books/add" element={<AddBooks />} />
         <Route path="/members" element={<Members />} />
         <Route path="/table" element={<CustomTable />} />
-        <Route path="/books/add" element={<AddBooks />} />
+        
         <Route path="/books/edit/:id" element={<EditBook />} />
         <Route path="/members/add" element={<AddMembers />} />
         <Route path="/members/edit/:id" element={<EditMember />} />
         <Route path="/transactions" element={<Transaction />} />
         <Route path="/transactions/add" element={<AddTransaction />} />
+        <Route path="/transactions/edit" element={<EditTransaction />} />
       </Route>
 
       {/* Redirect unknown routes */}
